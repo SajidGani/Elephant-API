@@ -1,3 +1,5 @@
+package com.csc340.Elephants.API;
+
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
@@ -5,7 +7,7 @@ import java.util.*;
 @Service
 public class ElephantService {
 
-    private final ElephantRepository elephantRepository;
+    private ElephantRepository elephantRepository;
 
     // Constructor Injection (Recommended)
     @Autowired
@@ -14,7 +16,9 @@ public class ElephantService {
     }
 
     public List<Elephant> getAllElephants() {
-        return elephantRepository.findAll();  // ✅ Correct usage
+        List<Elephant> elephants = elephantRepository.findAll();
+        System.out.println("Fetched elephants: " + elephants);  // Log output
+        return elephants;
     }
 
     public Optional<Elephant> getElephantById(int id) {

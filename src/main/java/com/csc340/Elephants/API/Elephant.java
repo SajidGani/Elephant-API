@@ -1,3 +1,5 @@
+package com.csc340.Elephants.API;
+
 import jakarta.persistence.*;
 
 @Entity

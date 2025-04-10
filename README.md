@@ -1,4 +1,4 @@
-Elephant-API
+com.csc340.Elephants.API.Elephant-API
 
 GET, POST and DELETE requests are possible with this API. 
 
