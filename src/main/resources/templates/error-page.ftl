@@ -10,7 +10,8 @@
 <div class="container text-center">
     <h1 class="display-4 text-danger">Oops! Something went wrong.</h1>
     <p class="lead">It seems that we have encountered an issue with the page you're trying to access.</p>
-    <p>Please try again later or <a href="/elephants/view">go back to the elephant list</a>.</p>
+    <p>Please try again later or </p>
+    <p><a href="/elephants/all">go back to the elephant list</a>.</p>
     <hr>
     <p>If the problem persists, please contact support.</p>
 </div>

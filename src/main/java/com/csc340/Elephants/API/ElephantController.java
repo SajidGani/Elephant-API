@@ -13,8 +13,7 @@ public class ElephantController {
     @Autowired
     private ElephantService elephantService;
 
-    // View all elephants
-    @GetMapping("/view")
+    @GetMapping("/all")
     public String viewAllElephants(Model model) {
         List<Elephant> elephants = elephantService.getAllElephants();
         model.addAttribute("elephants", elephants);
@@ -26,39 +25,40 @@ public class ElephantController {
         return "add-elephant";
     }
 
-    @PostMapping
+    @PostMapping("/add-elephant")
     public String addElephant(@ModelAttribute Elephant elephant) {
         elephantService.saveElephant(elephant);
-        return "redirect:/elephants/view";
+        return "redirect:/elephants/all";
     }
 
     @GetMapping("/update/{id}")
-    public String showUpdateForm(@PathVariable Integer id, Model model) {
-        System.out.println("Fetching elephant with ID: " + id);
+    public String showUpdateForm(@PathVariable int id, Model model) {
         Elephant elephant = elephantService.getElephantById(id).orElse(null);
 
         if (elephant != null) {
             model.addAttribute("elephant", elephant);
-            System.out.println("Found Elephant: " + elephant);
-            return "update-elephant";
+            return "redirect:/elephants/update";
         } else {
-            System.out.println("Elephant not found with ID: " + id);
-            return "redirect:/elephants/view";
+            return "redirect:/elephants/all";
         }
     }
 
     @PostMapping("/update/{id}")
     public String updateElephant(@PathVariable Integer id, @ModelAttribute Elephant elephant) {
-        System.out.println("Updating elephant with ID: " + id);
-        elephant.setId(id);
-        elephantService.saveElephant(elephant);
-        return "redirect:/elephants/view";
-    }
+        Elephant updatedElephant = elephantService.updateElephant(id, elephant);
 
+        if (updatedElephant != null) {
+            System.out.println("Updated Elephant Data: " + updatedElephant);
+            return "redirect:/elephants/all";
+        } else {
+            System.out.println("Elephant not found with ID: " + id);
+            return "redirect:/elephants/all";
+        }
+    }
 
     @GetMapping("/delete/{id}")
     public String deleteElephant(@PathVariable Integer id) {
         elephantService.deleteElephant(id);
-        return "redirect:/elephants/view";
+        return "redirect:/elephants/all";
     }
 }

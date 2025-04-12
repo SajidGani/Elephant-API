@@ -9,8 +9,7 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError() {
-        // This will return the custom error page
-        return "error-page"; // Refers to error-page.ftl template
+        return "error-page";
     }
 
     public String getErrorPath() {

@@ -9,7 +9,6 @@ public class ElephantService {
 
     private ElephantRepository elephantRepository;
 
-    // Constructor Injection (Recommended)
     @Autowired
     public ElephantService(ElephantRepository elephantRepository) {
         this.elephantRepository = elephantRepository;
@@ -17,19 +16,26 @@ public class ElephantService {
 
     public List<Elephant> getAllElephants() {
         List<Elephant> elephants = elephantRepository.findAll();
-        System.out.println("Fetched elephants: " + elephants);  // Log output
-        return elephants;
+        return elephantRepository.findAll();
     }
 
     public Optional<Elephant> getElephantById(int id) {
-        return elephantRepository.findById(id);  // ✅ Correct usage
+        return elephantRepository.findById(id);
     }
 
     public Elephant saveElephant(Elephant elephant) {
-        return elephantRepository.save(elephant);  // ✅ Correct usage
+        return elephantRepository.save(elephant);
     }
 
-    public void deleteElephant(Integer id) {
-        elephantRepository.deleteById(id);  // ✅ Correct usage
+    public Elephant updateElephant(Integer id, Elephant elephant) {
+        if (elephantRepository.existsById(id)) {
+            elephant.setId(id);
+            return elephantRepository.save(elephant);
+        }
+        return null;
+    }
+
+        public void deleteElephant(Integer id) {
+        elephantRepository.deleteById(id);
     }
 }
